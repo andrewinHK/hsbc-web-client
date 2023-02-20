@@ -16,13 +16,15 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 
 class HSBCwebClient:
-    def __init__(self, url, login, password):
+    def __init__(self, url, login=None, password=None):
         self._url = url
         self._login = login
         self._password = password
+        self._logged_on = False
         self._logger = logging.getLogger('hsbc-web-client')
         self.elements = []
         self.accounts = []
+        self.properties = []
 
     def launch(self, *, verbose=True, gui=True, maximized=True):
         if verbose:
