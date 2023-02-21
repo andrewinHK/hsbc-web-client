@@ -5,9 +5,9 @@ import math
 class Account:
     def __init__(self):
         self.title = None
-        self.number = -1
+        self.number = ""
         self.balance = 0
-        self.currency = None
+        self.currency = ""
 
     def get_title(self, client, element):
         subelement = element.find_element(
@@ -26,7 +26,7 @@ class Account:
             client._logger.info(f'account number: {number}')
         except NoSuchElementException:
             client._logger.info("No account number on this account")
-            number = None
+            number = ""
 
         return number
 
@@ -41,7 +41,7 @@ class Account:
         except NoSuchElementException:
             client._logger.info(f'No balance found for this account')
             balance = math.nan
-
+        balance = float(balance)
         return balance
 
     def get_currency(self, client, element):
@@ -52,7 +52,7 @@ class Account:
             client._logger.info(f'account currency: {currency}')
         except NoSuchElementException:
             client._logger.info(f'No currency found for this account')
-            currency = None
+            currency = ""
 
         return currency
 

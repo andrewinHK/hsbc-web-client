@@ -106,7 +106,7 @@ class HSBCwebClientHK(HSBCwebClient):
             for element in elements:
                 title = account.get_title(self, element)
                 number = account.get_account_number(self, element)
-                balance = account.get_balance(self, element)
+                balance = str(account.get_balance(self, element))
                 currency = account.get_currency(self, element)
 
                 f.write(f'{title},{number},{balance},{currency}\n')
