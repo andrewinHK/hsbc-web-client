@@ -24,21 +24,21 @@ class HSBCwebClientHK(HSBCwebClient):
 
         self._logger.info("stage LOGON")
 
-        WebDriverWait(self._driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//*[contains(text(), 'Log on')]"))).click()
+        WebDriverWait(self._driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//*[contains(text(), 'Log on')]"))).click()
         self._logger.debug("menu for log on is clickable")
 
-        menu_item = WebDriverWait(self._driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), 'Log on')]")))
+        menu_item = WebDriverWait(self._driver, 30).until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), 'Log on')]")))
         self._logger.debug("menu for log on is visible")
 
         ActionChains(self._driver).move_to_element(menu_item).perform()
         self._logger.debug("menu for log on is clicked")
 
-        WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//*[contains(text(), 'HSBC Online Banking')]"))).click()
+        WebDriverWait(self._driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//*[contains(text(), 'HSBC Online Banking')]"))).click()
         self._logger.debug("menu item for log on is clicked")
 
         self._logger.info("stage IDENTIFICATION")
 
-        WebDriverWait(self._driver, 15).until(EC.title_contains("Log on to Internet Banking: Username | HSBC"))
+        WebDriverWait(self._driver, 30).until(EC.title_contains("Log on to Internet Banking: Username | HSBC"))
         self._logger.debug(f'loaded page: "{self._driver.title}"')
 
         element = WebDriverWait(self._driver, 30).until(EC.presence_of_element_located((By.ID, "Username1")))
@@ -50,11 +50,11 @@ class HSBCwebClientHK(HSBCwebClient):
 
         self._logger.info("stage SECURITY")
 
-        WebDriverWait(self._driver, 15).until(EC.title_contains(
+        WebDriverWait(self._driver, 30).until(EC.title_contains(
             "| Log on | HSBC"))
         self._logger.debug(f'loaded page: "{self._driver.title}"')
 
-        WebDriverWait(self._driver, 15).until(EC.presence_of_element_located((By.ID, "app-root")))
+        WebDriverWait(self._driver, 30).until(EC.presence_of_element_located((By.ID, "app-root")))
         self._logger.debug("found element: app-root")
 
         time.sleep(5)
@@ -67,7 +67,7 @@ class HSBCwebClientHK(HSBCwebClient):
             actions.send_keys(Keys.ENTER)
             actions.perform()
             self._logger.debug("selected login with password")
-            WebDriverWait(self._driver, 15).until(EC.title_contains("Password | Log on | HSBC"))
+            WebDriverWait(self._driver, 30).until(EC.title_contains("Password | Log on | HSBC"))
             self._logger.debug(f'loaded page: "{self._driver.title}"')
 
             WebDriverWait(self._driver, 30).until(EC.presence_of_element_located(
@@ -87,7 +87,7 @@ class HSBCwebClientHK(HSBCwebClient):
         self._logged_on = True
 
     def fetch(self):
-        WebDriverWait(self._driver, 15).until(EC.title_contains("Homepage | HSBC"))
+        WebDriverWait(self._driver, 30).until(EC.title_contains("Homepage | HSBC"))
         time.sleep(10)
         self._logger.debug(f'loaded page: "{self._driver.title}"')
         self._logger.info("stage FETCHING")
@@ -114,9 +114,9 @@ class HSBCwebClientHK(HSBCwebClient):
         self._logger.debug("exported as HTML tags")
 
     def get_account_info(self):
-        WebDriverWait(self._driver, 15).until(
+        WebDriverWait(self._driver, 30).until(
             EC.title_contains("Homepage | HSBC"))
-        time.sleep(10)
+        time.sleep(20)
 
         elements = self._driver.find_elements(
             "xpath", "//div[contains(@class, 'account-card-container')]")
@@ -143,7 +143,7 @@ class HSBCwebClientHK(HSBCwebClient):
         else:
             raise RuntimeError("found unexpected element")
 
-        WebDriverWait(self._driver, 15).until(
+        WebDriverWait(self._driver, 30).until(
             EC.title_contains("Log-off Page - HSBC HK"))
         self._logger.debug(f'loaded page: "{self._driver.title}"')
 
