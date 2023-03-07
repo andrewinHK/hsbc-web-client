@@ -31,17 +31,17 @@ class Property:
     def open_valuation(self, client):
         self.logger.info('page to be open: <{self.url}>')
         self.driver.get(self.url)
-        time.sleep(5)
+        time.sleep(10)
         self.logger.debug("web page is open")
 
     def _choose_item(self, parent, menu, value):
-        time.sleep(2)
-        element = wait(self.driver, 5).until(EC.element_to_be_clickable((
+        time.sleep(5)
+        element = wait(self.driver, 10).until(EC.element_to_be_clickable((
             By.ID, parent)))
         element.click()
         self.logger.debug("Clicked on %s", parent)
 
-        element = wait(self.driver, 5).until(EC.presence_of_element_located((
+        element = wait(self.driver, 10).until(EC.presence_of_element_located((
             By.ID, menu)))
         self.logger.debug("Found %s", menu)
 
